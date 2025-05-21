@@ -11,6 +11,46 @@ public interface GroundMarkerProfilesConfig extends Config {
 	String GROUP = "groundMarkerProfile";
 
 	// ------------------------------------------------------------
+	@ConfigSection(
+			name = "General Settings",
+			position = 0,
+			description = "Display settings for all tiles",
+			closedByDefault = false
+	)
+	String groundMarkerGeneralSettings = "groundMarkerGeneralSettings";
+
+	@ConfigItem(
+			keyName = "borderWidth",
+			name = "Border width",
+			description = "Width of the marked tile border",
+			section = groundMarkerGeneralSettings,
+			position = 0
+	)
+	default double borderWidth() {
+		return 2;
+	}
+
+	@ConfigItem(
+			keyName = "drawOnMinimap",
+			name = "Draw tiles on minimap",
+			description = "Configures whether marked tiles should be drawn on minimap",
+			section = groundMarkerGeneralSettings,
+			position = 0
+	)
+	default boolean drawTilesOnMinimmap() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "fillOpacity",
+			name = "Fill opacity",
+			description = "Opacity of the tile fill color",
+			section = groundMarkerGeneralSettings,
+			position = 0
+	)
+	default int fillOpacity() {
+		return 50;
+	}
 
 	// Group 0 (+1 for visible strings)
 	@ConfigSection(

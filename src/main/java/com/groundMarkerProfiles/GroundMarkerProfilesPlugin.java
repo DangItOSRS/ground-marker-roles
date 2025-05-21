@@ -5,6 +5,7 @@ import com.google.inject.Provides;
 import javax.inject.Inject;
 
 import com.groundMarkerProfiles.ui.GroundMarkerOverlay;
+import com.groundMarkerProfiles.ui.GroundMarkerMinimapOverlay;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameStateChanged;
@@ -44,6 +45,7 @@ public class GroundMarkerProfilesPlugin extends Plugin {
 	public ProfileSwapper profileSwapper;
 	private PointManager pointManager;
 	private GroundMarkerOverlay groundMarkerOverlay;
+	private GroundMarkerMinimapOverlay groundMarkerMinimapOverlay;
 	private GroundMarkerProfilesSidePanel sidePanel;
 	private NavigationButton sidePanelButton;
 
@@ -58,7 +60,9 @@ public class GroundMarkerProfilesPlugin extends Plugin {
 		pointManager = new PointManager(profileSwapper, gson, client);
 
 		groundMarkerOverlay = new GroundMarkerOverlay(pointManager, client, config);
+		groundMarkerMinimapOverlay = new GroundMarkerMinimapOverlay(pointManager, client, config);
 		overlayManager.add(groundMarkerOverlay);
+		overlayManager.add(groundMarkerMinimapOverlay);
 
 		pointManager.loadPoints();
 		createSidePanel();
@@ -69,6 +73,7 @@ public class GroundMarkerProfilesPlugin extends Plugin {
 	{
 		log.info("Ground Marker Profiles stopped");
 		overlayManager.remove(groundMarkerOverlay);
+		overlayManager.remove(groundMarkerMinimapOverlay);
 		removeSidePanel();
 	}
 
